@@ -6,7 +6,7 @@
     background-image: url("../Images/Hero_Img.svg");
     background-repeat: no-repeat;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-size: cover;
     display: flex;
     align-items: center;
