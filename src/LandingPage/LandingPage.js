@@ -21,8 +21,6 @@ import { faHome, faLightbulb, faSlidersH, faBusinessTime } from '@fortawesome/fr
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
-
-
 function ElevationScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
