@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { Link, NavLink } from "react-router-dom";
+// import { Link, NavLink } from "react-router-dom";
 import Footer from "../CommonComponents/Footer/Footer";
 import "../CommonStyle/CommonStyle.css";
 import "./LandingPage.css";
@@ -38,9 +38,7 @@ function ElevationScroll(props) {
 }
 
 
-const LandingPage = () => {
-  const gradient = 'linear-gradient(to bottom, #3b5998, #0b7dda)';
- 
+const LandingPage = () => { 
   return (
     <>
     <ElevationScroll>
