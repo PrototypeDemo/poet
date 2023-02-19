@@ -18,6 +18,12 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faLightbulb, faSlidersH, faBusinessTime } from '@fortawesome/free-solid-svg-icons';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -39,13 +45,26 @@ function ElevationScroll(props) {
 
 
 const LandingPage = () => { 
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
     <>
     <ElevationScroll>
     <AppBar className="app-bar"> 
         <Toolbar className="tool-bar">
           <img src={logo} alt="logo" className="logo" />
-          <Button variant="contained" size="large" className="hero-img-btns">
+          <Button variant="contained" size="large" className="hero-img-btns" onClick={handleClickOpen}>
             Learn More!
           </Button>
           </Toolbar>
@@ -64,10 +83,48 @@ const LandingPage = () => {
             to the right person, through the right channel at the right time...
             just like a poet!
           </Typography>
-          <Button variant="contained" size="large" className="hero-img-btns">
+          <Button variant="contained" size="large" className="hero-img-btns" onClick={handleClickOpen}>
             Start Your Conversations
           </Button>
         </div>
+        <Dialog open={open} onClose={handleClose}>
+        <img src={logo} alt="logo" className="dark-logo" />
+        <DialogTitle>Request a Demo</DialogTitle>
+        <DialogContent>
+          <DialogContentText className="m-b-15">
+          Just answer a few simple questions so we can personalize the right experience for you.
+          </DialogContentText>
+         <Grid container spacing={2} className="m-b-15">
+            <Grid item xs={6}>
+          <TextField id="firstName" label="First Name" placeholder="Enter your first name" variant="outlined" required fullWidth/>
+          </Grid>
+          <Grid item xs={6}>
+          <TextField id="lastName" label="Last Name" placeholder="Enter your last name" variant="outlined" required fullWidth/>
+          </Grid>
+          <Grid item xs={12}>
+          <TextField id="email" label="Business Email" placeholder="Enter your business email" variant="outlined" required fullWidth pattern="^[a-zA-Z0-9._%+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!live.com)(?!outlook.com)[a-zA-Z0-9_-]+.[a-zA-Z0-9-.]{2,61}$"  />
+          </Grid>
+          {/* <Grid item xs={6}>
+          <TextField id="companySize" label="Company Size" placeholder="Enter your company size" variant="outlined" required fullWidth/>
+          </Grid>
+          <Grid item xs={6}>
+          <TextField id="interestModule" label="Interested Module" placeholder="Enter your interested module" variant="outlined" required fullWidth/>
+          </Grid> */}
+          <Grid item xs={12}>
+          <TextField id="comment" label="What would you be using poet for?" variant="outlined" placeholder="Enter your comment" required fullWidth  multiline rows={3}/>
+          </Grid>
+          </Grid>
+          <DialogActions className="no-padding">
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" onClick={handleClose}>Request</Button>
+        </DialogActions>
+         
+        </DialogContent>
+      
+        
+      </Dialog>
+
+
 
         <div class="scroll-downs">
           <div class="mousey">

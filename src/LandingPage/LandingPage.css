@@ -1,6 +1,12 @@
 .primary-color{
     color: #861DDD;
 }
+.dark-logo{
+    filter: invert(1);
+    padding: 24px 24px 0px;
+    width: 125px;
+}
+
 .hero-img-box{
     background: linear-gradient(to right top, #EDEDED 0%, #861DDD 100%);
     background-image: url("../Images/Hero_Img.svg");
