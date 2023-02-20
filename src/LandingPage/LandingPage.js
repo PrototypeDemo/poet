@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -14,16 +14,18 @@ import journeyManagerScreen from "../Images/journey_manager_screen.svg";
 import controlCenterScreen from "../Images/control_center_screen.svg";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faLightbulb, faSlidersH, faBusinessTime } from '@fortawesome/free-solid-svg-icons';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faHome,faLightbulb,faSlidersH,faBusinessTime,} from "@fortawesome/free-solid-svg-icons";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -37,15 +39,16 @@ function ElevationScroll(props) {
 
   return React.cloneElement(children, {
     elevation: trigger ? 6 : 0,
-    style: { backgroundColor: trigger ? 'rgba(0, 0, 0, 0.4)' : 'transparent',
-    backdropFilter: trigger ? 'blur(20px)' : 'none',
-   }
+    style: {
+      backgroundColor: trigger ? "rgba(0, 0, 0, 0.4)" : "transparent",
+      backdropFilter: trigger ? "blur(20px)" : "none",
+    },
   });
 }
 
+const LandingPage = () => {
 
-const LandingPage = () => { 
-
+  //modal 
 
   const [open, setOpen] = React.useState(false);
 
@@ -57,19 +60,99 @@ const LandingPage = () => {
     setOpen(false);
   };
 
+//Request a demo form field states
+
+const [firstName, setFirstName]= useState('');
+const [lastName, setLastName]= useState('');
+const [email, setEmail]= useState('');
+const [comment, setComment] = useState('');
+
+//Form submit event
+const handleSubmit = (e) => {
+  // e.preventDefault();
+  // // console.log(firstName, lastName, email, comment);
+  // const formEle = document.querySelector("form");
+  // const formDatab = new FormData(formEle);
+  // const timestamp = new Date(); // get the current date and time
+  // formDatab.append('Timestamp', timestamp.toISOString()); // add a new key-value pair to the form data
+  // fetch(
+  //   "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
+  //   {
+  //     method: "POST",
+  //     body: formDatab
+  //   }
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // handleClose();
+  // setAlertOpen(true);
+  // setFirstName('');
+  // setLastName('');
+  // setEmail('');
+  // setComment('');
+
+  e.preventDefault();
+  const formEle = document.querySelector("form");
+  const formDatab = new FormData(formEle);
+  const timestamp = new Date().toISOString(); // get the current timestamp and format it as a string
+  formDatab.append("Timestamp", timestamp); // add the timestamp value to the FormData object
+  fetch(
+    "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
+    {
+      method: "POST",
+      body: formDatab
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  handleClose();
+  setAlertOpen(true);
+  setFirstName('');
+  setLastName('');
+  setEmail('');
+  setComment('');
+}
+
+//success alert
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+const [alertOpen, setAlertOpen] = React.useState(false);
+const alertHandleClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setAlertOpen(false);
+};
+
 
   return (
     <>
-    <ElevationScroll>
-    <AppBar className="app-bar"> 
-        <Toolbar className="tool-bar">
-          <img src={logo} alt="logo" className="logo" />
-          <Button variant="contained" size="large" className="hero-img-btns" onClick={handleClickOpen}>
-            Learn More!
-          </Button>
+      <ElevationScroll>
+        <AppBar className="app-bar">
+          <Toolbar className="tool-bar">
+            <img src={logo} alt="logo" className="logo" />
+            <Button
+              variant="contained"
+              size="large"
+              className="hero-img-btns"
+              onClick={handleClickOpen}
+            >
+              Learn More!
+            </Button>
           </Toolbar>
         </AppBar>
-        </ElevationScroll>
+      </ElevationScroll>
       <Box className="hero-img-box">
         <div className="hero-img-content">
           <Typography variant="h6" color="white" className="f-s-2 f-w-600">
@@ -83,48 +166,106 @@ const LandingPage = () => {
             to the right person, through the right channel at the right time...
             just like a poet!
           </Typography>
-          <Button variant="contained" size="large" className="hero-img-btns" onClick={handleClickOpen}>
+          <Button
+            variant="contained"
+            size="large"
+            className="hero-img-btns"
+            onClick={handleClickOpen}
+          >
             Start Your Conversations
           </Button>
         </div>
         <Dialog open={open} onClose={handleClose}>
-        <img src={logo} alt="logo" className="dark-logo" />
-        <DialogTitle>Request a Demo</DialogTitle>
-        <DialogContent>
-          <DialogContentText className="m-b-15">
-          Just answer a few simple questions so we can personalize the right experience for you.
-          </DialogContentText>
-         <Grid container spacing={2} className="m-b-15">
-            <Grid item xs={6}>
-          <TextField id="firstName" label="First Name" placeholder="Enter your first name" variant="outlined" required fullWidth/>
-          </Grid>
-          <Grid item xs={6}>
-          <TextField id="lastName" label="Last Name" placeholder="Enter your last name" variant="outlined" required fullWidth/>
-          </Grid>
-          <Grid item xs={12}>
-          <TextField id="email" label="Business Email" placeholder="Enter your business email" variant="outlined" required fullWidth pattern="^[a-zA-Z0-9._%+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!live.com)(?!outlook.com)[a-zA-Z0-9_-]+.[a-zA-Z0-9-.]{2,61}$"  />
-          </Grid>
-          {/* <Grid item xs={6}>
-          <TextField id="companySize" label="Company Size" placeholder="Enter your company size" variant="outlined" required fullWidth/>
-          </Grid>
-          <Grid item xs={6}>
-          <TextField id="interestModule" label="Interested Module" placeholder="Enter your interested module" variant="outlined" required fullWidth/>
-          </Grid> */}
-          <Grid item xs={12}>
-          <TextField id="comment" label="What would you be using poet for?" variant="outlined" placeholder="Enter your comment" required fullWidth  multiline rows={3}/>
-          </Grid>
-          </Grid>
-          <DialogActions className="no-padding">
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleClose}>Request</Button>
-        </DialogActions>
-         
-        </DialogContent>
-      
-        
-      </Dialog>
+          <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
+            <img src={logo} alt="logo" className="dark-logo" />
+            <DialogTitle>Request a Demo</DialogTitle>
+            <DialogContent>
+              <DialogContentText className="m-b-15">
+                Just answer a few simple questions so we can personalize the
+                right experience for you.
+              </DialogContentText>
+              <Grid container spacing={2} className="m-b-15">
+                <Grid item xs={6}>
+                  <TextField
+                    id="firstName"
+                    label="First Name"
+                    name="FirstName"
+                    placeholder="Enter your first name"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    
+                    onChange={(e)=>setFirstName(e.target.value)}
+                    value={firstName}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    id="lastName"
+                    label="Last Name"
+                    name="LastName"
+                    placeholder="Enter your last name"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    onChange={(e)=>setLastName(e.target.value)}
+                    value={lastName}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="email"
+                    label="Business Email"
+                    name="BusinessEmail"
+                    placeholder="Enter your business email"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    pattern="^[a-zA-Z0-9._%+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!live.com)(?!outlook.com)[a-zA-Z0-9_-]+.[a-zA-Z0-9-.]{2,61}$"
+                    onChange={(e)=>setEmail(e.target.value)}
+                    value={email}
+                  />
+                </Grid>
+                  {
+                  /* <Grid item xs={6}>
+                  <TextField id="companySize" label="Company Size" placeholder="Enter your company size" variant="outlined" required fullWidth/>
+                  </Grid>
+                  <Grid item xs={6}>
+                  <TextField id="interestModule" label="Interested Module" placeholder="Enter your interested module" variant="outlined" required fullWidth/>
+                  </Grid> */
+                  }
+                <Grid item xs={12}>
+                  <TextField
+                    id="comment"
+                    name="CommentMessage"
+                    label="What would you be using poet for?"
+                    variant="outlined"
+                    placeholder="Enter your comment"
+                    required
+                    fullWidth
+                    multiline
+                    rows={3}
+                    onChange={(e)=>setComment(e.target.value)}
+                    value={comment}
+                  />
+                </Grid>
+              </Grid>
+              <DialogActions className="no-padding">
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button type="submit" variant="contained">
+                  Request
+                </Button>
+              </DialogActions>
+            </DialogContent>
+          </Box>
+        </Dialog>
 
-
+        <Snackbar open={alertOpen} autoHideDuration={4000} onClose={alertHandleClose}>
+        <Alert onClose={alertHandleClose} severity="success" sx={{ width: '100%' }}>
+          Form submitted successfully
+        </Alert>
+      </Snackbar>
+     
 
         <div class="scroll-downs">
           <div class="mousey">
@@ -142,7 +283,7 @@ const LandingPage = () => {
           <Grid container spacing={12}>
             <Grid item xs={6} className="d-flex">
               <div>
-              <FontAwesomeIcon icon="home" className="fa-custom-icons" />
+                <FontAwesomeIcon icon="home" className="fa-custom-icons" />
               </div>
               <div>
                 <Typography className="grey-50">Higher Productivity</Typography>
@@ -159,7 +300,9 @@ const LandingPage = () => {
               </div>
             </Grid>
             <Grid item xs={6} className="d-flex">
-              <div><FontAwesomeIcon icon="lightbulb" className="fa-custom-icons"/></div>
+              <div>
+                <FontAwesomeIcon icon="lightbulb" className="fa-custom-icons" />
+              </div>
               <div>
                 <Typography className="grey-50">
                   Higher Effectiveness & Improved Busiess KPIs
@@ -179,8 +322,9 @@ const LandingPage = () => {
             </Grid>
 
             <Grid item xs={6} className="d-flex">
-            
-              <div><FontAwesomeIcon icon="sliders-h" className="fa-custom-icons"/></div>
+              <div>
+                <FontAwesomeIcon icon="sliders-h" className="fa-custom-icons" />
+              </div>
               <div>
                 <Typography className="grey-50">
                   Reduced Communication Cost & Better CX
@@ -198,7 +342,12 @@ const LandingPage = () => {
             </Grid>
 
             <Grid item xs={6} className="d-flex">
-              <div><FontAwesomeIcon icon="business-time" className="fa-custom-icons"/></div>
+              <div>
+                <FontAwesomeIcon
+                  icon="business-time"
+                  className="fa-custom-icons"
+                />
+              </div>
               <div>
                 <Typography className="grey-50">
                   Faster Time To Value
@@ -248,8 +397,13 @@ const LandingPage = () => {
 
       <Box className="h-100vh w-100 d-flex-ver-cen">
         <Container maxWidth="lg">
-          <Grid container alignItems="center" spacing={12} className="plan-text-grid">
-          <Grid item xs={5}>
+          <Grid
+            container
+            alignItems="center"
+            spacing={12}
+            className="plan-text-grid"
+          >
+            <Grid item xs={5}>
               <Typography variant="h4" className="f-w-700 m-b-2 primary-color">
                 Plan, Test & Orchestrate
               </Typography>
@@ -269,7 +423,6 @@ const LandingPage = () => {
                 className="w-100"
               />
             </Grid>
-            
           </Grid>
         </Container>
       </Box>
