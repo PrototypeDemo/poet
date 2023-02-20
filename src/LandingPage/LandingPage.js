@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -26,6 +26,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import ReactGA from "react-ga";
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -47,6 +48,10 @@ function ElevationScroll(props) {
 }
 
 const LandingPage = () => {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   //modal 
 
