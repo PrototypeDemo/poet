@@ -74,32 +74,6 @@ const [comment, setComment] = useState('');
 
 //Form submit event
 const handleSubmit = (e) => {
-  // e.preventDefault();
-  // // console.log(firstName, lastName, email, comment);
-  // const formEle = document.querySelector("form");
-  // const formDatab = new FormData(formEle);
-  // const timestamp = new Date(); // get the current date and time
-  // formDatab.append('Timestamp', timestamp.toISOString()); // add a new key-value pair to the form data
-  // fetch(
-  //   "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
-  //   {
-  //     method: "POST",
-  //     body: formDatab
-  //   }
-  // )
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // handleClose();
-  // setAlertOpen(true);
-  // setFirstName('');
-  // setLastName('');
-  // setEmail('');
-  // setComment('');
 
   e.preventDefault();
   const formEle = document.querySelector("form");
@@ -183,7 +157,7 @@ const alertHandleClose = (event, reason) => {
         <Dialog open={open} onClose={handleClose}>
           <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
             <img src={logo} alt="logo" className="dark-logo" />
-            <DialogTitle>Request a Demo</DialogTitle>
+            <DialogTitle>Register for your Interest!</DialogTitle>
             <DialogContent>
               <DialogContentText className="m-b-15">
                 Just answer a few simple questions so we can personalize the
