@@ -8,6 +8,9 @@ import {
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./LandingPage/LandingPage";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-0T8TF5G15X");
 
 let theme = createTheme({
   typography: {

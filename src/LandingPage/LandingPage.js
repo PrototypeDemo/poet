@@ -31,6 +31,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import ReactGA from "react-ga4";
+import { Category } from "@mui/icons-material";
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -52,8 +54,6 @@ function ElevationScroll(props) {
 }
 
 const LandingPage = () => {
-  //modal
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -73,32 +73,12 @@ const LandingPage = () => {
 
   //Form submit event
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // // console.log(firstName, lastName, email, comment);
-    // const formEle = document.querySelector("form");
-    // const formDatab = new FormData(formEle);
-    // const timestamp = new Date(); // get the current date and time
-    // formDatab.append('Timestamp', timestamp.toISOString()); // add a new key-value pair to the form data
-    // fetch(
-    //   "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
-    //   {
-    //     method: "POST",
-    //     body: formDatab
-    //   }
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // handleClose();
-    // setAlertOpen(true);
-    // setFirstName('');
-    // setLastName('');
-    // setEmail('');
-    // setComment('');
+    ReactGA.event({
+      action: "demo_request_action",
+      Category: "request_category",
+      label: "request_label",
+      value: "xxxxx",
+    });
 
     e.preventDefault();
     const formEle = document.querySelector("form");
@@ -181,7 +161,7 @@ const LandingPage = () => {
         <Dialog open={open} onClose={handleClose}>
           <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
             <img src={logo} alt="logo" className="dark-logo" />
-            <DialogTitle>Request a Demo</DialogTitle>
+            <DialogTitle>Register for your Interest!</DialogTitle>
             <DialogContent>
               <DialogContentText className="m-b-15">
                 Just answer a few simple questions so we can personalize the
@@ -288,7 +268,7 @@ const LandingPage = () => {
             Why use poet?
           </Typography>
           <Grid container spacing={12}>
-            <Grid item xs={6} className="d-flex">
+            <Grid item xs={12} sm={6} className="d-flex">
               <div>
                 <FontAwesomeIcon icon="home" className="fa-custom-icons" />
               </div>
@@ -306,7 +286,7 @@ const LandingPage = () => {
                 </Typography>
               </div>
             </Grid>
-            <Grid item xs={6} className="d-flex">
+            <Grid item xs={12} sm={6} className="d-flex">
               <div>
                 <FontAwesomeIcon icon="lightbulb" className="fa-custom-icons" />
               </div>
@@ -328,7 +308,7 @@ const LandingPage = () => {
               </div>
             </Grid>
 
-            <Grid item xs={6} className="d-flex">
+            <Grid item xs={12} sm={6} className="d-flex">
               <div>
                 <FontAwesomeIcon icon="sliders-h" className="fa-custom-icons" />
               </div>
@@ -348,7 +328,7 @@ const LandingPage = () => {
               </div>
             </Grid>
 
-            <Grid item xs={6} className="d-flex">
+            <Grid item xs={12} sm={6} className="d-flex">
               <div>
                 <FontAwesomeIcon
                   icon="business-time"
@@ -460,11 +440,13 @@ const LandingPage = () => {
           </Grid>
         </Container>
       </Box>
-      {/* <Box className="m-t-5 p-t-3">
+      <Box className="m-t-5 p-t-3">
         <Footer />
-      </Box> */}
+      </Box>
     </>
   );
 };
 
 export default LandingPage;
+
+//how to send emails with mailgun in nodejs?
