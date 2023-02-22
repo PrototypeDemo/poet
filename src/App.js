@@ -8,10 +8,6 @@ import {
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./LandingPage/LandingPage";
-// import ReactGA from "react-ga";
-
-// const TRACKING_ID ="";
-// ReactGA.initialize(TRACKING_ID);
 
 let theme = createTheme({
   typography: {
