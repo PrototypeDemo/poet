@@ -440,9 +440,9 @@ const LandingPage = () => {
           </Grid>
         </Container>
       </Box>
-      <Box className="m-t-5 p-t-3">
+      {/* <Box className="m-t-5 p-t-3">
         <Footer />
-      </Box>
+      </Box> */}
     </>
   );
 };
