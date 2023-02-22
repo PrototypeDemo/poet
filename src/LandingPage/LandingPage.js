@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -17,16 +17,21 @@ import Toolbar from "@mui/material/Toolbar";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faHome,faLightbulb,faSlidersH,faBusinessTime,} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faLightbulb,
+  faSlidersH,
+  faBusinessTime,
+} from "@fortawesome/free-solid-svg-icons";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import ReactGA from "react-ga";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+// import ReactGA from "react-ga";
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -48,12 +53,11 @@ function ElevationScroll(props) {
 }
 
 const LandingPage = () => {
+  // useEffect(() => {
+  //   ReactGA.pageview(window.location.pathname);
+  // }, []);
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
-
-  //modal 
+  //modal
 
   const [open, setOpen] = React.useState(false);
 
@@ -65,55 +69,53 @@ const LandingPage = () => {
     setOpen(false);
   };
 
-//Request a demo form field states
+  //Request a demo form field states
 
-const [firstName, setFirstName]= useState('');
-const [lastName, setLastName]= useState('');
-const [email, setEmail]= useState('');
-const [comment, setComment] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [comment, setComment] = useState("");
 
-//Form submit event
-const handleSubmit = (e) => {
+  //Form submit event
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formEle = document.querySelector("form");
+    const formDatab = new FormData(formEle);
+    const timestamp = new Date().toISOString(); // get the current timestamp and format it as a string
+    formDatab.append("Timestamp", timestamp); // add the timestamp value to the FormData object
+    fetch(
+      "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
+      {
+        method: "POST",
+        body: formDatab,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    handleClose();
+    setAlertOpen(true);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setComment("");
+  };
 
-  e.preventDefault();
-  const formEle = document.querySelector("form");
-  const formDatab = new FormData(formEle);
-  const timestamp = new Date().toISOString(); // get the current timestamp and format it as a string
-  formDatab.append("Timestamp", timestamp); // add the timestamp value to the FormData object
-  fetch(
-    "https://script.google.com/macros/s/AKfycby2QFzMSDvLEfdxXlhOwOyCfx1yqlV4lhqQ-DTR9CizV4wRzFyBmicV120X3JSPnsJs/exec",
-    {
-      method: "POST",
-      body: formDatab
+  //success alert
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [alertOpen, setAlertOpen] = React.useState(false);
+  const alertHandleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  handleClose();
-  setAlertOpen(true);
-  setFirstName('');
-  setLastName('');
-  setEmail('');
-  setComment('');
-}
-
-//success alert
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-const [alertOpen, setAlertOpen] = React.useState(false);
-const alertHandleClose = (event, reason) => {
-  if (reason === 'clickaway') {
-    return;
-  }
-  setAlertOpen(false);
-};
-
+    setAlertOpen(false);
+  };
 
   return (
     <>
@@ -173,8 +175,7 @@ const alertHandleClose = (event, reason) => {
                     variant="outlined"
                     required
                     fullWidth
-                    
-                    onChange={(e)=>setFirstName(e.target.value)}
+                    onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
                   />
                 </Grid>
@@ -187,7 +188,7 @@ const alertHandleClose = (event, reason) => {
                     variant="outlined"
                     required
                     fullWidth
-                    onChange={(e)=>setLastName(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
                   />
                 </Grid>
@@ -201,18 +202,16 @@ const alertHandleClose = (event, reason) => {
                     required
                     fullWidth
                     pattern="^[a-zA-Z0-9._%+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!live.com)(?!outlook.com)[a-zA-Z0-9_-]+.[a-zA-Z0-9-.]{2,61}$"
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
                 </Grid>
-                  {
-                  /* <Grid item xs={6}>
+                {/* <Grid item xs={6}>
                   <TextField id="companySize" label="Company Size" placeholder="Enter your company size" variant="outlined" required fullWidth/>
                   </Grid>
                   <Grid item xs={6}>
                   <TextField id="interestModule" label="Interested Module" placeholder="Enter your interested module" variant="outlined" required fullWidth/>
-                  </Grid> */
-                  }
+                  </Grid> */}
                 <Grid item xs={12}>
                   <TextField
                     id="comment"
@@ -224,7 +223,7 @@ const alertHandleClose = (event, reason) => {
                     fullWidth
                     multiline
                     rows={3}
-                    onChange={(e)=>setComment(e.target.value)}
+                    onChange={(e) => setComment(e.target.value)}
                     value={comment}
                   />
                 </Grid>
@@ -239,12 +238,19 @@ const alertHandleClose = (event, reason) => {
           </Box>
         </Dialog>
 
-        <Snackbar open={alertOpen} autoHideDuration={4000} onClose={alertHandleClose}>
-        <Alert onClose={alertHandleClose} severity="success" sx={{ width: '100%' }}>
-          Form submitted successfully
-        </Alert>
-      </Snackbar>
-     
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={4000}
+          onClose={alertHandleClose}
+        >
+          <Alert
+            onClose={alertHandleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Form submitted successfully
+          </Alert>
+        </Snackbar>
 
         <div class="scroll-downs">
           <div class="mousey">
@@ -440,3 +446,5 @@ const alertHandleClose = (event, reason) => {
 };
 
 export default LandingPage;
+
+//how to send emails with mailgun in nodejs?

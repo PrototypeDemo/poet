@@ -1,13 +1,17 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme,ThemeProvider,responsiveFontSizes} from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  responsiveFontSizes,
+} from "@mui/material/styles";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./LandingPage/LandingPage";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 
-const TRACKING_ID ="";
-ReactGA.initialize(TRACKING_ID);
+// const TRACKING_ID ="";
+// ReactGA.initialize(TRACKING_ID);
 
 let theme = createTheme({
   typography: {
@@ -39,8 +43,6 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 const App = () => {
-
-
   return (
     <>
       <CssBaseline />
