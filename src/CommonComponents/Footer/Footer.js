@@ -1,16 +1,15 @@
-import React from 'react';
-import FooterVectorImg from '../../Images/footer_vector_img.png';
-import './Footer.css';
+import React from "react";
+// import FooterVectorImg from "../../Images/footer_vector_img.png";
+import "./Footer.css";
 
 const Footer = () => {
-    return (
-        <div>
-        <img src={FooterVectorImg} className="footer-vector-img" alt="Footer Vector Shape" />
-        {/* <p className="copyright-txt"> &#169; 2023 Poet All Rights Reserved</p> */}
-    </div>  
-    );
-}
+  return (
+    <div>
+      {/* <img src={FooterVectorImg} className="footer-vector-img" alt="Footer Vector Shape" /> */}
+      {/* <p className="copyright-txt"> &#169; 2023 Poet All Rights Reserved</p> */}
+      <p>Developed and Designed with love ❤️ Poet</p>
+    </div>
+  );
+};
 
 export default Footer;
-
-

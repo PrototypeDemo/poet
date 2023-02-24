@@ -32,7 +32,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import ReactGA from "react-ga4";
-import { Category } from "@mui/icons-material";
 
 // Add the icons to the library
 library.add(faHome, faLightbulb, faSlidersH, faBusinessTime);
@@ -127,8 +126,8 @@ const LandingPage = () => {
             <img src={logo} alt="logo" className="logo" />
             <Button
               variant="contained"
-              size="large"
-              className="hero-img-btns"
+              size="medium"
+              className="hero-img-btns learn-more-btn"
               onClick={handleClickOpen}
             >
               Learn More!
@@ -151,7 +150,7 @@ const LandingPage = () => {
           </Typography>
           <Button
             variant="contained"
-            size="large"
+            size="medium"
             className="hero-img-btns"
             onClick={handleClickOpen}
           >
@@ -262,12 +261,15 @@ const LandingPage = () => {
         </div>
       </Box>
 
-      <Box className="h-100vh w-100 d-flex-ver-cen">
-        <Container maxWidth="lg">
-          <Typography variant="h3" className="f-w-700 primary-color m-b-4">
+      <Box className="h-100vh w-100 d-flex-ver-cen section-1">
+        <Container maxWidth="lg" className="section-1-container">
+          <Typography
+            variant="h3"
+            className="f-w-700 primary-color m-b-4 section-heading"
+          >
             Why use poet?
           </Typography>
-          <Grid container spacing={12}>
+          <Grid container spacing={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={12} sm={6} className="d-flex">
               <div>
                 <FontAwesomeIcon icon="home" className="fa-custom-icons" />
@@ -354,10 +356,14 @@ const LandingPage = () => {
         </Container>
       </Box>
 
-      <Box className="h-100vh gradient-bg w-100 d-flex-ver-cen">
-        <Container maxWidth="lg">
-          <Grid container alignItems="center" spacing={12}>
-            <Grid item xs={5}>
+      <Box className="h-100vh gradient-bg w-100 d-flex-ver-cen section-2">
+        <Container maxWidth="lg" className="section-2-container">
+          <Grid
+            container
+            alignItems="center"
+            spacing={{ xs: 4, sm: 8, md: 12 }}
+          >
+            <Grid item xs={12} sm={5}>
               <Typography variant="h2" className="f-w-700 m-b-3" color="white">
                 poet can help you better...
               </Typography>
@@ -375,22 +381,22 @@ const LandingPage = () => {
                 improve.
               </Typography>
             </Grid>
-            <Grid item xs={7} className="mockupup-img-grid">
+            <Grid item xs={12} sm={7} className="mockupup-img-grid">
               <img src={studioScreen} alt="Studio Screen" className="w-100" />
             </Grid>
           </Grid>
         </Container>
       </Box>
 
-      <Box className="h-100vh w-100 d-flex-ver-cen">
-        <Container maxWidth="lg">
+      <Box className="h-100vh w-100 d-flex-ver-cen section-3">
+        <Container maxWidth="lg" className="section-3-container">
           <Grid
             container
             alignItems="center"
-            spacing={12}
+            spacing={{ xs: 4, sm: 8, md: 12 }}
             className="plan-text-grid"
           >
-            <Grid item xs={5}>
+            <Grid item xs={12} sm={5}>
               <Typography variant="h4" className="f-w-700 m-b-2 primary-color">
                 Plan, Test & Orchestrate
               </Typography>
@@ -403,7 +409,7 @@ const LandingPage = () => {
                 real-time based on individual customer behaviour.
               </Typography>
             </Grid>
-            <Grid item xs={7} className="mockup-img-grid-2">
+            <Grid item xs={12} sm={7} className="mockup-img-grid-2">
               <img
                 src={journeyManagerScreen}
                 alt="Journey Manager Screen"
@@ -414,10 +420,14 @@ const LandingPage = () => {
         </Container>
       </Box>
 
-      <Box className="h-100vh gradient-bg w-100 d-flex-ver-cen">
-        <Container maxWidth="lg">
-          <Grid container alignItems="center" spacing={12}>
-            <Grid item xs={5}>
+      <Box className="h-100vh gradient-bg w-100 d-flex-ver-cen section-4">
+        <Container maxWidth="lg" className="section-4-container">
+          <Grid
+            container
+            alignItems="center"
+            spacing={{ xs: 4, sm: 8, md: 12 }}
+          >
+            <Grid item xs={12} sm={5}>
               <Typography variant="h4" className="f-w-700 m-b-2" color="white">
                 Control & Optimize
               </Typography>
@@ -430,7 +440,7 @@ const LandingPage = () => {
                 right time.
               </Typography>
             </Grid>
-            <Grid item xs={7} className="mockupup-img-grid">
+            <Grid item xs={12} sm={7} className="mockupup-img-grid">
               <img
                 src={controlCenterScreen}
                 alt="Control Center Screen"
@@ -440,9 +450,9 @@ const LandingPage = () => {
           </Grid>
         </Container>
       </Box>
-      {/* <Box className="m-t-5 p-t-3">
+      <Box className="footer-box">
         <Footer />
-      </Box> */}
+      </Box>
     </>
   );
 };
